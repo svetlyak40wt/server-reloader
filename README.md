@@ -55,3 +55,5 @@ Credentials
 
 Many thanks to original authors of the autoreloader, I took as the basis.
 
+[TheBot]: http://github.com/svetlyak40wt/thebot
+[server-reloader]: http://github.com/svetlyak40wt/server-reloader
