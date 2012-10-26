@@ -28,26 +28,28 @@ Example usage
 
 Here is a simple example, how to use a reloader.
 
-    ```python
-    def run_server():
-        """Some function, which creates and runs your server."""
-        pass
+```python
+def run_server():
+    """Some function, which creates and runs your server."""
+    pass
 
-    def main():
-        server_reloader.main(
-            run_server,
-            before_reload=lambda: print('Reloading code…')
-        )
+def main():
+    server_reloader.main(
+        run_server,
+        before_reload=lambda: print('Reloading code…')
+    )
 
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
+```
 
 
 If you want to trigger code reloading on some custom event, then just do:
 
-    ```python
-    from server_reloader import trigger_reload
-    trigger_reload()
+```python
+from server_reloader import trigger_reload
+trigger_reload()
+```
 
 
 Credentials
