@@ -8,7 +8,7 @@ themselves. And there isn't any python module, simple enougth to use in a small 
 Some times ago, I started to write a chat bot called [TheBot][] and begun to look for
 a separate server reloader's implementation. And found nothing suitable.
 
-Than, I extracted autoreloader from the Django's codebase and put it into a separate
+Then, I extracted autoreloader from the Django's codebase and put it into a separate
 module, which README you are reading now. Code was partly modified, now it allows
 not only to watch on file changes but also to reload upon a some event.
 
