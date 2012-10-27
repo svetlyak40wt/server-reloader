@@ -116,7 +116,23 @@ def _restart_with_reloader():
 
 def _reloader(main_func, args, kwargs, before_reload, watch_on_files):
     if os.environ.get("RUN_MAIN") == "true":
-        thread = threading.Thread(target=main_func, args=args, kwargs=kwargs)
+
+        exit_code = [0]
+
+        def sys_exit_catcher():
+            """A special handler of SystemExit exception.
+            This exception can be processed only if thrown
+            from the main thread, so we'll pull this from
+            a worker into the main thread.
+            """
+            try:
+                main_func(*args, **kwargs)
+            except SystemExit as e:
+                exit_code[0] = e.code
+                # we set event to speedup exit, not for real reloading
+                _reload_event.set()
+
+        thread = threading.Thread(target=sys_exit_catcher)
         thread.daemon = True
         thread.start()
 
@@ -131,6 +147,11 @@ def _reloader(main_func, args, kwargs, before_reload, watch_on_files):
                 # this child process will never be interrupted
                 # by Ctrl-C
                 _reload_event.wait(timeout=1.0)
+
+                if not thread.is_alive():
+                    # if main_func exited, then we should terminate reloader too
+                    sys.exit(exit_code[0])
+
                 if _reload_event.is_set():
                     before_reload()
                     sys.exit(3) # force reload
