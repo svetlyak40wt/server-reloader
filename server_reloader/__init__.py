@@ -185,7 +185,7 @@ def main(
     @param before_exit - a function to call if a programm was interrupted by Ctrl+C.
            This is really needed, because the main_func is executed in a child thread,
            but KeyboardInterrupt exception is sent to the main thread.
-    @param watch_on_files — if True (default), then a separate thread will be
+    @param watch_on_files - if True (default), then a separate thread will be
            started to watch on changes in loaded modules' sources.
     """
     _reloader(main_func, args or (), kwargs or {}, before_reload, before_exit, watch_on_files)
