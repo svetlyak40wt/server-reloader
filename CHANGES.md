@@ -1,3 +1,8 @@
+0.1.3
+-----
+
+* Fixed typo in docstring, causing a unicode error.
+
 0.1.2
 -----
 

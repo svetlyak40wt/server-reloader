@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='server-reloader',
-    version='0.1.2',
+    version='0.1.3',
     description='Provides easy way to reload you server on code changes or another events',
     keywords='server code reload reloader restarter',
     license = 'New BSD License',
