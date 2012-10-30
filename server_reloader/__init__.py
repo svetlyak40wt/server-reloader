@@ -114,7 +114,7 @@ def _restart_with_reloader():
             return exit_code
 
 
-def _reloader(main_func, args, kwargs, before_reload, watch_on_files):
+def _reloader(main_func, args, kwargs, before_reload, before_exit, watch_on_files):
     if os.environ.get("RUN_MAIN") == "true":
 
         exit_code = [0]
@@ -157,7 +157,7 @@ def _reloader(main_func, args, kwargs, before_reload, watch_on_files):
                     sys.exit(3) # force reload
 
         except KeyboardInterrupt:
-            pass
+            before_exit()
     else:
         try:
             exit_code = _restart_with_reloader()
@@ -174,7 +174,19 @@ def main(
         args=None,
         kwargs=None,
         before_reload=lambda: None,
+        before_exit=lambda: None,
         watch_on_files=True,
     ):
-    _reloader(main_func, args or (), kwargs or {}, before_reload, watch_on_files)
+    """Starts a 'main_func' under code reloader.
+
+    @param args - function's positional arguments.
+    @param kargs - function's keyword arguments.
+    @param before_reload - a function to call before code will be reloaded.
+    @param before_exit - a function to call if a programm was interrupted by Ctrl+C.
+           This is really needed, because the main_func is executed in a child thread,
+           but KeyboardInterrupt exception is sent to the main thread.
+    @param watch_on_files — if True (default), then a separate thread will be
+           started to watch on changes in loaded modules' sources.
+    """
+    _reloader(main_func, args or (), kwargs or {}, before_reload, before_exit, watch_on_files)
 

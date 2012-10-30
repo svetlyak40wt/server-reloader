@@ -1,3 +1,8 @@
+0.1.2
+-----
+
+* Added parameter before_reload, to pass callback to be called on KeyboardInterrupt exception.
+
 0.1.1
 -----
 
