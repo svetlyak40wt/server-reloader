@@ -3,7 +3,7 @@ Server Reloader
 
 It is common task in all web frameworks — to provide an easy way to reload development
 server on code changes. Most of these frameworks are carrying a reloader's code with
-themselves. And there isn't any python module, simple enougth to use in a small project.
+themselves. And there isn't any python module, simple enough to use in a small project.
 
 Some times ago, I started to write a chat bot called [TheBot][] and begun to look for
 a separate server reloader's implementation. And found nothing suitable.
